@@ -190,7 +190,7 @@ double test1_stack_impl()
 			memcpy(buffer + buffer_size, block->data, block_size);
 			buffer_size = new_buffer_size;
 		}
-		
+
 		reset_thread_stack(stack);
 
 		end = std::chrono::high_resolution_clock::now();
@@ -222,7 +222,7 @@ double test1_heap_impl()
 
 		size_t buffer_size = 0;
 		size_t buffer_capacity = 1024;
-		char* buffer = (char*)malloc( buffer_capacity);
+		char* buffer = (char*)malloc(buffer_capacity);
 
 		for (Block* block = list_item; block != nullptr; block = block->next)
 		{
