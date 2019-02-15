@@ -23,7 +23,7 @@ template<typename T>
 inline T* stack_alloc(Stack& stack, size_t size, size_t alignment);
 
 template<typename T>
-inline T* stack_realloc(Stack& stack, T* memory, size_t prev_size,
+inline T* stack_realloc(Stack& stack, T* memory, size_t memory_size,
 	size_t copy_size, size_t new_size, size_t alignment);
 
 inline void reset_thread_stack(Stack& stack);
@@ -59,14 +59,14 @@ inline T* stack_alloc(Stack& stack, size_t size, size_t alignment)
 }
 
 template<typename T>
-inline T* stack_realloc(Stack& stack, T* memory, size_t prev_size,
+inline T* stack_realloc(Stack& stack, T* memory, size_t memory_size,
 	size_t copy_size, size_t new_size, size_t alignment)
 {
 	if (memory == nullptr)
 		return stack_alloc<T>(stack, new_size, alignment);
 
 	char* const current = *stack.current;
-	char* const memory_end = (char*)memory + prev_size;
+	char* const memory_end = (char*)memory + memory_size;
 
 	if (memory_end == current)
 	{
