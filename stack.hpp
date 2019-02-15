@@ -15,9 +15,9 @@ struct Stack
 	char* original;
 };
 
-DLL void get_thread_stack(Stack& stack);
 DLL void initialize_thread_stack(void* buffer, size_t buffer_size);
 DLL void shutdown_thread_stack();
+DLL void get_thread_stack(Stack& stack);
 
 template<typename T>
 inline T* stack_alloc(Stack& stack, size_t size, size_t alignment);
@@ -25,6 +25,8 @@ inline T* stack_alloc(Stack& stack, size_t size, size_t alignment);
 template<typename T>
 inline T* stack_realloc(Stack& stack, T* memory, size_t prev_size,
 	size_t copy_size, size_t new_size, size_t alignment);
+
+inline void reset_thread_stack(Stack& stack);
 
 struct StackScope
 {
