@@ -83,7 +83,7 @@ inline T* stack_realloc(Stack& stack, T* memory, size_t prev_size,
 		return memory;
 	}
 
-	char* new_memory = stack_alloc<T>(stack, new_size, alignment);
+	char* const new_memory = stack_alloc<T>(stack, new_size, alignment);
 
 	if (new_memory != nullptr)
 		memcpy(new_memory, memory, copy_size * sizeof(T));
