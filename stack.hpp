@@ -40,13 +40,13 @@ private:
 #pragma region Inline
 
 template< typename T >
-constexpr T* align(T* value, size_t alignment);
+constexpr T* align_memory(T* value, size_t alignment);
 
 template<typename T>
 inline T* stack_alloc(Stack& stack, size_t size, size_t alignment)
 {
 	char* const current = *stack.current;
-	char* const memory = align(current, alignment);
+	char* const memory = align_memory(current, alignment);
 	char* const memory_end = memory + size * sizeof(T);
 
 	const bool has_enough_space = memory_end <= stack.end;
@@ -68,7 +68,7 @@ inline T* stack_realloc(Stack& stack, T* memory, size_t prev_size,
 
 	if (memory_end == current)
 	{
-		char* const new_memory = align(memory, alignment);
+		char* const new_memory = align_memory(memory, alignment);
 		char* const new_memory_end = new_memory + new_size * sizeof(T);
 
 		if (new_memory_end > stack.end)
@@ -95,7 +95,7 @@ inline void reset_thread_stack(Stack& stack)
 }
 
 template< typename T >
-constexpr T* align(T* value, size_t alignment)
+constexpr T* align_memory(T* value, size_t alignment)
 {
 	return (T*)(((size_t)value + alignment - 1) / alignment * alignment);
 }

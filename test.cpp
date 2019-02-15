@@ -98,7 +98,7 @@ double test0_alloca()
 inline void test0_alloca_impl()
 {
 	char* memory = (char*)_alloca(TEST0_ALLOCATION_SIZE + DEFAULT_ALIGNMENT);
-	memory = align(memory, DEFAULT_ALIGNMENT);
+	memory = align_memory(memory, DEFAULT_ALIGNMENT);
 	memset(memory, 0xff, TEST0_ALLOCATION_SIZE);
 }
 
